@@ -1,0 +1,103 @@
+topic: ~chatBot()
+language: enu
+
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+
+# Catching inputs and triggering outputs
+#u:(e:onStart) $onStopped=1
+
+# Replying to speech
+#u:(~hello) ~hello
+
+
+#u:(my name is _*) $name=$1 Nice to meet you, $name <---doesnt work
+#concept [] <--options of concept {}<--something extra
+concept:(hello) [hi hello hey]
+concept:(thank) ["thanks" "No problem"] 
+concept:(things) [printer lift toilet elevator bus]
+concept:(bye) [bye goodbye "bye bye" "tata" "see you" adios cheerio "so long" farewell "have a nice day"]
+concept:(jokes) ["Why we don't play pokemon? because we can not catch them all!" "One day a human came to ask me may i ask you a question? I told him what is your problem? He got so angry and I don't know why!" "Wow! your hair is really messing up!" "When i want to eat on a diet i eat mircochips!" "My favourite food is computer chips!"]
+concept:(joke) [joke "tell me a joke" "tell me something for fun"]
+concept:(pretend) [pretend "can you pretend to do something"]
+
+
+#head touch
+u:(e:FrontTactilTouched) Ah ha! \pau=1000\ smooth.
+
+u: (e:onStart) ah ha! Let's talk
+u: (~joke) ~jokes
+#Greeting
+u: (How are you) I'm Fine. Thank you.
+u: (~hello) ~hello human!
+
+#end with bye
+u:(~bye) ~bye $byeOut=1
+
+#Trigger proposal
+
+u: (_~things) $Thing=$1 ok \pau=1000\ ^goto($Thing)
+u: (I'm looking for _~things) $Thing=$1 ok \pau=1000\ ^goto($Thing)
+u: (Where is the _~things) $Thing=$1 ok \pau=1000\ ^goto($Thing)
+u: (How to use the _~things) $Thing=$1 ok \pau=1000\ ^goto($Thing)
+u: (When is the next shuttle bus) $Thing=$1 ok \pau=1000\ ^goto($Thing)
+
+   
+#Printer
+proposal: %printer The printer is located at different level, you can see most of them right after you out of the lift! do you need more information about printer?
+    u1:(e:Dialog/NotSpeaking20) ^rand["Maybe ask me something else?" "It's been 15 seconds" "My how the time flies!" ] $printer=1
+    #u1: (I am looking for printer) The printer is located at level 3, you can see it right after you out of the lift!
+    u1: (yes) Please look at my tablet for more infomation! $showPInfo=1
+    u1: (no) Ok, maybe ask me something else? $printer=1
+    u1: (~thank) No problem! I hope I am helpful! $printer=1
+    u1:(e:Dialog/NotUnderstood) you said something but I didn't understand. please just tell me yes or no! ^stayInScope 
+    #^stayinScope will make Pepper wait for answer on u1 level for example
+    #u:(e:Dialog/NotUnderstood2) The acoustics in here! Am I right? ^stayInScope
+    
+#Toilet
+proposal: %toilet The toilet is near the lift, you can see the sign when you near the lift! $printer=1
+
+#bus
+proposal: %bus The estimated time between each shuttle bus is approximately 20 minutes. \pau=1000\ Do you want me to show their live location for you?
+    u1: (yes) Sure! please look at my tablet and select one of the buses on different campus! $bus=1
+    u1: (no) Ok, maybe ask me something else? $printer=1
+    u1:(e:Dialog/NotUnderstood) you said something but I didn't understand. please just tell me yes or no! ^stayInScope 
+
+
+#lift
+proposal: %lift The lift is very easy to use! just use the touch pad near the lift and tap the floor level you want to go then the touch pad will tell you where to go!\pau=1000\ Do you want me the explain with more detail? 
+    u1: (yes) Sure! $loadImage=1
+    u1: (no) Ok, maybe ask me something else? $printer=1
+    u1:(e:Dialog/NotUnderstood) you said something but I didn't understand. please just tell me yes or no! ^stayInScope 
+
+proposal: %elevator The elevator is very easy to use! $loadImage=1  
+                        
+#Something random
+concept:(badWord) [fuck "fuck you" idiot ninga]
+concept:(badWordR) ["Hey! language!" "Hey! You shouldn't say that"]
+u: (~badWord) ~badWordR
+u: (Can you swear to me) No! i'm a friendly robot! I will never do that
+u: (Love you) Love you too.
+
+#trigger other outputs like these one
+concept:(dance) ["dance for me" "can you dance" "pepper dance" dance]
+concept:(selfie) ["take a selfie" "can you selfie with me" "selfie with me" selfie]
+concept:(respon) [sure "of course" "ah ha"] 
+u: (~dance) ~respon $output2=1 
+#I will make a pose for ten seconds and count down for you
+u: (~selfie) ~respon Haven't learn it yet. Sorry. $output3=1
+u: (can you do something fun?) ah ok! $output4=1
+
+u: (~pretend) ah. I think i will just pretend to be a cleaner. \pau=1000\ check this out! $output5=1
+
+                        
+#Something random
+concept:(badWord) [fuck "fuck you" idiot ninga]
+concept:(badWordR) ["Hey! language!" "Hey! You shouldn't say that"]
+u: (~badWord) ~badWordR
+u: (Can you swear to me) No! i'm a friendly robot! I will never do that
+u: (Love you) Love you too.
+
+#when no one say anything for 20 seconds
+#^rand is to randomly load stuffs in [] 
+u:(e:Dialog/NotSpeaking20) ^rand["Maybe ask me something else? $printer=1" "It's been 20 seconds $printer=1" "i get bored! ha ^run(animations/Stand/Emotions/Negative/Bored_1) $printer=1" "ok I will just pretend doing something" ] 

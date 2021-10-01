@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pepper Home Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	
+    <script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!--<script src="js/jquery-3.1.0.min.js"></script> -->
+</head>
+<body>
+
+	<header>
+		
+		<!--for Pepper's voice-->
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<script src="/libs/qi/2/qi.js"></script>
+		
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link" onclick="homePSent(); return false;" href="index.html"><img src="img/pepperLogo.png"/></a>
+			</li>
+		</ul>
+
+	</header>
+	
+	<div class="divider-vertical"/>
+	
+	<h1>Hi, I'm Pepper! May I help you?</h1>
+	<!---onclick="sayMessageSent(); return false;" -->
+	<div class="divider-vertical"/>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<a onclick="pepperIntro(); return false;"><img src="img/pepperLogo.png" class="img-thumbnail"/><figcaption>Introduce myself</figcaption></a>
+			</div>
+			<div class="col">
+				<a onclick="startChat(); return false;"><img src="img/pepperLogo.png" class="img-thumbnail"/><figcaption>Chat with me!</figcaption></a>
+			</div>
+			<div class="col">
+				<a href="shuttlebustimes.html"><img src="img/pepperLogo.png" class="img-thumbnail"/><figcaption>Ask me something else!</figcaption></a>
+			</div>
+			<div class="col">
+				<a href="goGoogle.html" ><img src="img/pepperLogo.png" class="img-thumbnail"/><figcaption>Take a survey!</figcaption></a>
+			</div> 			
+		</div>
+	</div>
+	
+</body>
+</html>

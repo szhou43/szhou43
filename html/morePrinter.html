@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pepper Home Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	
+    <script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!--<script src="js/jquery-3.1.0.min.js"></script> -->
+		
+	<style>
+	.button {
+	  display: inline-block;
+	  padding: 15px 25px;
+	  font-size: 24px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: black;
+	  background-color: gary;
+	  border: none;
+	  border-radius: 15px;
+	  width: 60%
+	}
+
+	.button:hover {background-color: #3e8e41}
+
+	.button:active {
+	  background-color: #3e8e41;
+	  box-shadow: 0 5px #666;
+	  transform: translateY(4px);
+	}
+	</style>
+	
+</head>
+<body>
+
+	<header>
+		
+		<!--for Pepper's voice-->
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<script src="/libs/qi/2/qi.js"></script>
+		
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link" onclick="startChat(); return false;" href="chatBotGuide.html"><img src="img/pepperLogo.png"/></a>
+			</li>
+		</ul>
+
+	</header>
+	
+	<div class="divider-vertical" align="center">
+	<h3>Tap below FAQs and I will anwser you!</h3>
+		<h3 style="color: red; font-weight: bold; font-size: 100%;" >
+			 Tap left top to return chatbot.
+		</h3>
+	
+	
+	<!---onclick="sayMessageSent(); return false;" -->
+		<button class="button" id="statusChange6"><div>I'm not a student of the University. Am I able to print or photocopy in the Library?</div></button><br><br>
+	    <button class="button" id="statusChange3"><div>Where are the printers in 1PSQ?</div></button><br><br>
+		<button class="button" id="statusChange1"><div>How can I check the funds on my Library card/photocopy account?</div></button><br><br>
+		<button class="button" id="statusChange2"><div>I have forgotten my PIN. How do I get a new one?</div></button><br><br>
+		<button class="button" id="statusChange4"><div>How can I print from my personal device?</div></button><br><br>
+		<button class="button" id="statusChange5"><div>Does the library have fax machines?</div></button><br><br>
+		
+	</div>
+	
+	
+	<script>
+	// Add more button changes
+	var speakUse = "";
+	
+		$("#statusChange6").click(function() {
+			if ($("#statusChange6 div").text() == "I'm not a student of the University. Am I able to print or photocopy in the Library?") {
+				$("#statusChange6 div").text("Non Western Sydney University students can use photocopying and printing facilities by purchasing a casual ticket in the Library via the ePay kiosk, however, visitors to the Parramatta City Campus Library Hub, will not be able to print or photocopy. Please note that the Library does not handle cash, so you will need to bring a debit or credit card.");
+				speakUse = $("#statusChange6 div").text();	
+				sayButton();
+			}
+			else if ($("#statusChange6 div").text() != "I'm not a student of the University. Am I able to print or photocopy in the Library?") {
+				$("#statusChange6 div").text("I'm not a student of the University. Am I able to print or photocopy in the Library?");
+			}		
+	    });
+		
+		$("#statusChange3").click(function() {
+			if ($("#statusChange3 div").text() == "Where are the printers in 1PSQ?") {
+				$("#statusChange3 div").text("The printer is basically located between level 3 to 7. you can find them near the lift on each level!");
+				speakUse = $("#statusChange3 div").text();	
+				sayButton();
+			}
+			else if ($("#statusChange3 div").text() != "Where are the printers in 1PSQ?") {
+				$("#statusChange3 div").text("Where are the printers in 1PSQ?");
+			}		
+	    });
+		
+		$("#statusChange1").click(function() {
+			if ($("#statusChange1 div").text() == "How can I check the funds on my Library card/photocopy account?") {
+				$("#statusChange1 div").text("You will need to come in to the Library to check the balance. You can check balances via the ePay kiosk. The balance will also display at the printers and copiers once you enter your ID and pin number.");
+				speakUse = $("#statusChange1 div").text();
+				sayButton();
+			}
+			else if ($("#statusChange1 div").text() == "You will need to come in to the Library to check the balance. You can check balances via the ePay kiosk. The balance will also display at the printers and copiers once you enter your ID and pin number.") {
+				$("#statusChange1 div").text("How can I check the funds on my Library card/photocopy account?");
+			}
+		});
+
+		$("#statusChange2").click(function() {
+			if ($("#statusChange2 div").text() == "I have forgotten my PIN. How do I get a new one?") {
+				$("#statusChange2 div").text("You will need to see library staff at the service desk who can reset your PIN linked to your ID card or casual access card. You then swipe your card at the ePay kiosk or enter your ID number at the printer/ copier and enter a new four digit PIN.");
+				speakUse = $("#statusChange2 div").text();	
+				sayButton();
+			}
+			else if ($("#statusChange2 div").text() == "You will need to see library staff at the service desk who can reset your PIN linked to your ID card or casual access card. You then swipe your card at the ePay kiosk or enter your ID number at the printer/ copier and enter a new four digit PIN.") {
+				$("#statusChange2 div").text("I have forgotten my PIN. How do I get a new one?");
+			}		
+	    });
+		
+		$("#statusChange4").click(function() {
+			if ($("#statusChange4 div").text() == "How can I print from my personal device?") {
+				$("#statusChange4 div").text("Yes, you can! Go to webprint.westernsydney.edu.au/WebPrint on your personal device to see more information!");
+				speakUse = $("#statusChange4 div").text();	
+				sayButton();
+			}
+			else if ($("#statusChange4 div").text() != "How can I print from my personal device?") {
+				$("#statusChange4 div").text("How can I print from my personal device?");
+			}		
+	    });
+		
+		$("#statusChange5").click(function() {
+			if ($("#statusChange5 div").text() == "Does the library have fax machines?") {
+				$("#statusChange5 div").text("No. The library does not have fax machines. However, all photocopiers in the library have a scanning and email option.");
+				speakUse = $("#statusChange5 div").text();	
+				sayButton();
+			}
+			else if ($("#statusChange5 div").text() != "Does the library have fax machines?") {
+				$("#statusChange5 div").text("Does the library have fax machines?");
+			}		
+	    });
+		
+	function sayButton(){
+	  session.service('ALAnimationPlayer').then(function (ani) {
+		ani.run('animations/Stand/Gestures/Explain_5');
+	  }, function (error) {
+		console.log(error);
+	  });
+
+	  session.service('ALTextToSpeech').then(function (tts) {
+		tts.say(speakUse);
+	  }, function (error) {
+		console.log(error);
+	  }); 
+	}	
+	
+	</script>
+	
+</body>
+</html>
